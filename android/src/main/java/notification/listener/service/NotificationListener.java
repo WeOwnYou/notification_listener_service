@@ -49,8 +49,15 @@ public class NotificationListener extends NotificationListenerService {
         byte[] appIcon = getAppIcon(packageName);
         byte[] largeIcon = null;
         Action action = NotificationUtils.getQuickReplyAction(notification.getNotification(), packageName);
-        cancelNotification(packageName, notification.getTag(), notification.getId());
-        Log.d("CancelNotif", "Attempt to cancel notificaton");
+
+        if (Build.VERSION.SDK_INT < 21) {
+            cancelNotification(notification.getPackageName(), notification.getTag(), notification.getId());
+            Log.d("CancelNotif1", "Attempt to cancel notificaton1");
+        }
+        else {
+            cancelNotification(notification.getKey());
+            Log.d("CancelNotif2", "Attempt to cancel notificaton2");
+        }
 
         if (Build.VERSION.SDK_INT >= VERSION_CODES.M) {
             largeIcon = getNotificationLargeIcon(getApplicationContext(), notification.getNotification());
