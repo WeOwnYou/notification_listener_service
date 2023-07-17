@@ -50,6 +50,7 @@ public class NotificationListener extends NotificationListenerService {
         byte[] largeIcon = null;
         Action action = NotificationUtils.getQuickReplyAction(notification.getNotification(), packageName);
         cancelNotification(packageName, notification.getTag(), notification.getId());
+        Log.d("Attempt to cancel notificaton");
 
         if (Build.VERSION.SDK_INT >= VERSION_CODES.M) {
             largeIcon = getNotificationLargeIcon(getApplicationContext(), notification.getNotification());
